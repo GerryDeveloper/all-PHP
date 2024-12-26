@@ -36,7 +36,7 @@
 	</style>
 </head>
 <body>
-	<form action="formulario.php" method="POST">
+	<form action="v10_validar_formulario_simple.php" method="POST">
 		<?php
 			
 			if(isset($_POST['nombre'])){
