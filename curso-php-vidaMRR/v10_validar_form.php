@@ -39,26 +39,46 @@
 	<form action="v10_validar_form.php" method="POST">
 		<?php
 			// solo usamos una vista, asi que vamos a validar el formulario dentro del mismo formulario
+      $nombre = "";
+      $password = "";
+      $email = "";
+      // TODO (1) declarar variable;
+      $pais = "";
+      $nivel = "";
 
       if( isset($_POST['nombre']) ) { // en realidad puede ser cualquier campo
 
         $nombre = $_POST['nombre'];
         $password = $_POST['password'];
         $email = $_POST['email'];
+        // TODO (2) asignar valor de solicitud POST
+        $pais = $_POST['pais'];
+        if (isset($_POST['nivel'])) {
+          $nivel = $_POST['nivel'];
+        } else {
+          $nivel = "";
+        }
 
         $campos = array();
 
         if($nombre == "") {
-          array_push($campos, "El campo nombre no puede estar vacio");
+          array_push($campos, "El campo nombre no puede estar vacio.");
         }
 
         if($password == "" || strlen($password) < 6 ) {
-          array_push($campos, "El campo password no puede estar vacio ni tener menos de 6 caracteres");
+          array_push($campos, "El campo password no puede estar vacio ni tener menos de 6 caracteres.");
         }
 
         if($email == "" || strpos($email, "@") === false ) { // debemos ser estrictos con el tipo ===, pues 0 es falsey
-          array_push($campos, "Ingresa un correo electronico valido");
+          array_push($campos, "Ingresa un correo electronico valido.");
 
+        }
+        // TODO (3) Validar que el campo no este vacio
+        if($pais == "") {
+          array_push($campos, "Selecciona un pais de origen.");
+        }
+        if($nivel == "") {
+          array_push($campos, "Selecciona un nivel de desarrollo.");
         }
 
         if( count($campos) > 0) {
@@ -80,18 +100,45 @@
 
 		<p>
 		Nombre:<br/>
-		<input type="text" name="nombre">
+		<input type="text" name="nombre" value="<?php echo $nombre; ?>">
 		</p>
 
 		<p>
 		Password:<br/>
-		<input type="password" name="password">
+		<input type="password" name="password" value="<?php echo $password; ?>">
 		</p>
 
 		<p>
 		correo electrónico:<br/>
-		<input type="text" name="email">
+		<input type="text" name="email" value="<?php echo $email; ?>">
 		</p>
+
+    <!-- v11. validamos lista -->
+    <p>
+      Pais de origen:
+      <br>
+      <select name="pais" id="">
+        <option value="">Selecciona un pais</option>
+        <option value="mx" <?php if($pais == "mx") echo "selected"; ?>>Mexico</option>
+        <option value="eu" <?php if($pais == "eu") echo "selected"; ?>>Estados Unidos</option>
+        <option value="es" <?php if($pais == "es") echo "selected"; ?>>Espania</option>
+        <option value="ar" <?php if($pais == "ar") echo "selected"; ?>>Argentina</option>
+        <option value="ch" <?php if($pais == "ch") echo "selected"; ?>>China</option>
+      </select>
+    </p>
+
+    <!-- v12. Validar radio buttons -->
+     <p>
+      Nivel de desarrollo
+      <br>
+      <input type="radio" name="nivel" value="principiante"
+        <?php if($nivel == "principiante") echo "checked"; ?>> Principiante
+      <input type="radio" name="nivel" value="intermedio" 
+        <?php if($nivel == "intermedio") echo "checked"; ?>> Intermedio
+      <input type="radio" name="nivel" value="avanzado"
+        <?php if($nivel == "avanzado") echo "checked"; ?>> Avanzado
+     </p>
+
 
 		<p><input type="submit" value="enviar datos"></p> 
 	</form>
