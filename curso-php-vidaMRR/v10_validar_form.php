@@ -65,7 +65,7 @@
           // si es mayor a 0 hay algun error
           echo "<div class='error'>";
           for($i = 0; $i < count($campos); $i++) {
-            echo "<li>" . $campos[$i] . "</div>";
+            echo "<li>" . $campos[$i] . "</li>";
           }
 
         } else {
