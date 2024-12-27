@@ -45,6 +45,7 @@
       // TODO (1) declarar variable;
       $pais = "";
       $nivel = "";
+      $lenguajes = array();
 
       if( isset($_POST['nombre']) ) { // en realidad puede ser cualquier campo
 
@@ -57,6 +58,12 @@
           $nivel = $_POST['nivel'];
         } else {
           $nivel = "";
+        }
+        // v13. Validamos checkboxes, recordar que se maneja como arreglo
+        if(isset($_POST['lenguajes']) ) {
+          $lenguajes = $_POST['lenguajes'];
+        } else {
+          $lenguajes = [];
         }
 
         $campos = array();
@@ -80,6 +87,11 @@
         if($nivel == "") {
           array_push($campos, "Selecciona un nivel de desarrollo.");
         }
+        // TODO. validacion
+        if ($lenguajes == "" || count($lenguajes) < 2) {
+          // si escojen 0 o 1
+          array_push($campos, "Selecciona almenos dos lenguajes de programacion.");
+        }
 
         if( count($campos) > 0) {
           // si es mayor a 0 hay algun error
@@ -93,6 +105,8 @@
                 Datos correctos";
         }
         echo "</div>";
+        
+
       }
 
 		?>
@@ -139,6 +153,21 @@
         <?php if($nivel == "avanzado") echo "checked"; ?>> Avanzado
      </p>
 
+     <!-- v13. Validamos checkboxes -->
+      <p>
+        Lenguajes de programacion
+        <br>
+        <input type="checkbox" name="lenguajes[]" value="php"
+          <?php if(in_array("php", $lenguajes)) echo "checked"; ?>> PHP <br>
+        <input type="checkbox" name="lenguajes[]" value="js"
+          <?php if(in_array("js", $lenguajes)) echo "checked"; ?>> JavaScript <br>
+        <input type="checkbox" name="lenguajes[]" value="java"
+          <?php if(in_array("java", $lenguajes)) echo "checked"; ?>> Java <br>
+        <input type="checkbox" name="lenguajes[]" value="swift"
+          <?php if(in_array("swift", $lenguajes)) echo "checked"; ?>> Switch <br>
+        <input type="checkbox" name="lenguajes[]" value="py"
+          <?php if(in_array("py", $lenguajes)) echo "checked"; ?>> Python <br>
+      </p>
 
 		<p><input type="submit" value="enviar datos"></p> 
 	</form>
