@@ -62,4 +62,21 @@
 //     FOREIGN KEY fk_evento_id(evento_id)
 //     REFERENCES evento(id)
 // );
+
+// ******* INNER JOIN
+/**
+ * 
+ */
+// # SELECT * FROM registros INNER JOIN usuarios ON registros.usuario_id = usuarios.id;
+// SELECT * FROM registros 
+// INNER JOIN usuarios ON registros.usuario_id = usuarios.id
+// INNER JOIN evento ON evento.id = registros.evento_id;
+
+// SELECT registros.id, usuarios.nombre, evento.nombre FROM registros 
+// INNER JOIN usuarios ON registros.usuario_id = usuarios.id
+// INNER JOIN evento ON evento.id = registros.evento_id;
+
+// ******** conexion a la bd
+// pass: 6q0Y6GF8@
+
 ?>
