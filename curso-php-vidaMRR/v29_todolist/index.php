@@ -57,6 +57,15 @@
       } else {
         die("Error al ACTUALIZAR los datos: " . $conexion->error);
       }
+    } else if (isset($_POST['eliminar'])) {
+      $id = $_POST['eliminar'];
+      $sql = "DELETE FROM todotable WHERE id = $id";
+
+      if ($conexion->query($sql) === true) {
+        // echo '<div> <form action=""><input type="checkbox">' . $texto . '</form> </div>';
+      } else {
+        die("Error al ACTUALIZAR los datos: " . $conexion->error);
+      }
     }
 
 
@@ -82,6 +91,10 @@
               id="<?php echo $row['id']; ?>" type="checkbox" onchange="completarPendiente(this)">
             <?php echo $row['texto']; ?>
           </form> 
+          <form method="POST" id="form_eliminar_<?php echo $row['id']; ?>" action="">
+            <input type="hidden" name="eliminar" value="<?php echo $row['id']; ?>">
+            <input type="submit" value="Eliminar">
+          </form>
         </div>
         <?php
 
