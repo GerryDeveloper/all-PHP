@@ -21,17 +21,23 @@ class DB {
 
   public function connect() { // si se omite public, por defecto se le considera public
     try {
-      $connection = "mysql:host=" . $this->host . ";dbname=" . $this.db . ";charset=" . $this->charset;
+      $connection = "mysql:host=" . $this->host . ";dbname=" . $this->db . ";charset=" . $this->charset;
       $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                   PDO::ATTR_EMULATE_PREPARES => false]; 
                 // para permitir a pdo obtener errores de forma mas sintactica
 
       $pdo = new PDO($connection, $this->user, $this->password, $options);
 
+      return $pdo;
     } catch (PDOException $e) {
       printr_r("Error connection: " . $e->getMessage() );
     }
   }
 }
+
+/**
+ * dime como funciona una aplicacion de usuarios masiva, 
+ * como twitter, 9gag, reddit, que necesito aprender para crear la mia?
+ */
 
 ?>
