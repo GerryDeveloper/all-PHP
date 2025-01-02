@@ -16,15 +16,17 @@ include_once "includes/survey.php";
 </head>
 <body>
   <form action="#" method="post">
-    <h2>Cual es tu lenguaje de programacion favorito?</h2>
-
+    
     <?php
       $survey = new Survey();
       if(isset($_POST['lenguaje']) ) {
         $survey->setOptionSelected($_POST['lenguaje']);
         $survey->vote();
       }
+
+      echo $survey->getTotalVotes();
     ?>
+    <h2>Cual es tu lenguaje de programacion favorito?</h2>
 
     <input type="radio" name="lenguaje" id="" value="c"> C <br>
     <input type="radio" name="lenguaje" id="" value="c++"> C++ <br>

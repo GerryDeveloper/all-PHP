@@ -1,5 +1,3 @@
-
-
 <?php
 
 class DB {
@@ -8,11 +6,11 @@ class DB {
   private $user;
   private $password;
   private $charset;
-
+// mising db
 
   public function __construct() { // funcion que se ejecuta cuando creamos un nuevo objeto
      $this->host = "localhost";
-     $this->dv = "encuestas";
+     $this->db = "encuestas";
      $this->user = "root";
      $this->password = "6q0Y6GF8@";
      $this->charset = "utf8mb4";
@@ -26,7 +24,7 @@ class DB {
                   PDO::ATTR_EMULATE_PREPARES => false]; 
                 // para permitir a pdo obtener errores de forma mas sintactica
 
-      $pdo = new PDO($connection, $this->user, $this->password, $options);
+      $pdo = new PDO($connection, $this->user, $this->password, $options,);
 
       return $pdo;
     } catch (PDOException $e) {
