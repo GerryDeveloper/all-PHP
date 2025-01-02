@@ -19,22 +19,36 @@ include_once "includes/survey.php";
     
     <?php
       $survey = new Survey();
+      $showResults = false;
+
       if(isset($_POST['lenguaje']) ) {
+        $showResults = true;
         $survey->setOptionSelected($_POST['lenguaje']);
         $survey->vote();
       }
 
-      echo $survey->getTotalVotes();
+      // echo $survey->getTotalVotes();
     ?>
     <h2>Cual es tu lenguaje de programacion favorito?</h2>
+    <?php
+    // los inputs debemos ocultarlos en funcion de la variable showResults, que determina la vista
+      if($showResults) {
+        $lenguajes = $survey->showResults(); // devuelve un obj
 
-    <input type="radio" name="lenguaje" id="" value="c"> C <br>
-    <input type="radio" name="lenguaje" id="" value="c++"> C++ <br>
-    <input type="radio" name="lenguaje" id="" value="java"> Java <br>
-    <input type="radio" name="lenguaje" id="" value="swift"> Swift <br>
-    <input type="radio" name="lenguaje" id="" value="python"> Python <br>
+        echo '<h2>' . $survey->getTotalVotes() . " votos totales</h2>";
 
-    <input type="submit" value="Votar!">
+        foreach($lenguajes as $lenguaje) {
+          $porcentaje = $survey->getPercentageVotes($lenguaje['votos']); // recorrido para cada opcion
+
+          // include_once "vistas/vista-resultados.php"; // profe
+          include "vistas/vista-resultados.php"; // mi codigo
+        }
+      } else {
+        include "vistas/vista-votacion.php";
+      }
+    ?>
+
+    <!-- on vista-votacion.php -->
   </form>
 
 <?php
