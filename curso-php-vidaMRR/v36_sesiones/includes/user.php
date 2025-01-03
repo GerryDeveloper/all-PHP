@@ -3,14 +3,16 @@
 // vamos a manejar la parte del usuario, validar que existe al hacer login, 
 // y obtener el usuario como tal, nombre y username
 
+include_once "bd.php";
+
 class User extends DB {
   private $nombre;
   private $username;
 
   public function userExists($user, $pass) {
-    $md5pass = pass($pass);
-
-    $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user AND password = :pass;');
+    $md5pass = md5($pass);
+ 
+    $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user AND password = :pass');
     $query->execute(['user' => $user, 'pass' => $md5pass]);
 
     if ($query->rowCount() ) { // rawCount es una funcion que me permite saber el numero de filas
