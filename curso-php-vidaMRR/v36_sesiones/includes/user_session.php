@@ -17,7 +17,7 @@ class UserSession {
     return $_SESSION['user'];
   }
 
-  public function closeSesion() {
+  public function closeSession() {
     session_unset(); // borra los valores de las sesiones
     session_destroy(); // destruye las sesiones como tal
   }
