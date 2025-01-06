@@ -34,3 +34,6 @@ if (isset($_SESSION['user']) ) {
 }
 
 ?>
+
+<!-- el formulario va aqui??: res: no no va aqui, es un .php llamado email  -->
+
