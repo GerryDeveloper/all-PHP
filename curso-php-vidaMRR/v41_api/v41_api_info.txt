@@ -1,0 +1,14 @@
+API - PHP
+
+
+vamos a utilizar una base de datos y php para crear una interfaz
+la cual despues de configurarla va a poder ser "expuesta" para que cualquie otro servicio pueda acceder
+a ella a traves de la URL 
+
+- ventaja de usar una API:
+- seria como un servicio que tu estas poniendo a modo de interfaz, en este caso a travez de notacion JSON
+- en la cual a ti no te importa si el backend de esta interfaz esta en PHP o en Java, .NET
+  . esto es una ventaja, muchos servicios utilizan las APIs pues porque es una forma bastante generalizada
+    para acceder a los recursos de algunos servicios en internet
+- lo que va a regresar la API de este ejemplo es una lista de peliculas que son consultadas
+  a travez de una base de datos
