@@ -32,13 +32,55 @@ class ApiPeliculas {
       
       }
 
-      echo json_encode($peliculas);
+      // echo json_encode($peliculas);
+      $this->printJSON($peliculas);
 
     } else {
       // cuando en la tabla no hay ningun elemento, o no hay ningun cambio
-      echo json_encode(array('mensaje' => 'no hay elementos registrados'));
+      // echo json_encode(array('mensaje' => 'no hay elementos registrados'));
+      // error('no hay elementos registrados');
+      $this->error('no hay elementos registrados');
     }
   }
+
+  // video 42 filtrar API
+  function getById($id) {
+    
+    $pelicula = new Pelicula();
+
+    $peliculas = array();
+    $peliculas['items'] = array();
+
+    $resultado = $pelicula->obtenerPelicula($id);
+
+    if ($resultado->rowCount() == 1) {
+
+      $row = $resultado->fetch();
+      $item = array(
+        'id' => $row['id'],
+        'nombre' => $row['nombre'],
+        'imagen' => $row['imagen']
+      );
+      array_push($peliculas['items'], $item);
+      
+
+      $this->printJSON($peliculas);
+
+    } else {
+      
+      $this->error('no hay elementos registrados');
+    }
+  }
+
+  function printJSON($array) {
+    // para imprimir el JSON en la estructura
+    echo '<code>' . json_encode($array) . '</code>';
+  }
+
+  function error($mensaje) {
+    echo '<code>' . json_encode(array('mensaje' => $mensaje)) . '</code>';
+  }
+
 
 }
 

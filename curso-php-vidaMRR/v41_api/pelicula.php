@@ -11,6 +11,16 @@ class Pelicula extends DB {
 
     return $query;
   }
+
+  // video 42 filtrar API
+  function obtenerPelicula($id) {
+    $query = $this->connect()->prepare('SELECT * FROM pelicula WHERE id = :id');
+    $query->execute(['id' => $id]); 
+    // un arreglo de parametros
+    // con esto se evita SQLInyection, como?
+    return $query;
+  } 
+
 }
 
 ?>
